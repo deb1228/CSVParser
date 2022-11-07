@@ -43,3 +43,4 @@ Route::get('/Login2',function(){
 return Inertia :: render('Login2');
 
 });
+
