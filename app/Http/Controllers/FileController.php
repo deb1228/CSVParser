@@ -18,9 +18,9 @@ class FileController extends Controller
         $extention = $file->getClientOriginalExtension();
         $mime = $file->getMimeType();
 
-        $file->move('/storage', $alias.'.'.$extention);
+        $path = Storage::putFileAs('files', $file, $alias.'.'.$extention);
 
-        File::create([
+        $file_uploaded = File::create([
             'name' => $name,
             'path' => '/storage/'.$alias.'.'.$extention,
             'alias' => $alias,
@@ -28,6 +28,15 @@ class FileController extends Controller
             'mime' => $mime,
         ]);
 
-        return response();
+        if(!$file_uploaded){
+            return response()->json([
+                'message' => 'File upload Failed.'
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'File uploaded Successfully',
+            'path' => $path,
+        ]);
     }
 }
