@@ -13,7 +13,7 @@ class FileUploadRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,12 +24,7 @@ class FileUploadRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'alt' => 'nullable|string',
-            'path' =>  'required|string',
-            'mime' => 'required|string',
-            'extension' =>  'required|string',
-            'status' => 'nullable|string',
+            'file_target' => 'file|required'
         ];
     }
 }
