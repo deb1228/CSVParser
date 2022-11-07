@@ -31,7 +31,7 @@ Route::middleware([ 'auth:sanctum', 'verified',])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::post('/upload/csv', [])
+    // Route::post('/upload/csv', [])
 });
 Route::get('/Dashboard2',function(){
         // PAth of View
