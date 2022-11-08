@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\FileController;
 
 
 /*
@@ -15,6 +16,7 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -33,14 +35,28 @@ Route::middleware([ 'auth:sanctum', 'verified',])->group(function () {
 
     // Route::post('/upload/csv', [])
 });
-Route::get('/Dashboard2',function(){
+Route::get('/DataSet',function(){
         // PAth of View
-    return Inertia :: render('Dashboard2');
+    return Inertia::render('DataSetProcessing');
     
+});
+
+Route::get('/GraphPresentation',function(){
+    // PAth of View
+return Inertia::render('GraphPresentation');
+
 });
 Route::get('/Login2',function(){
     // PAth of View
-return Inertia :: render('Login2');
+return Inertia::render('Login2');
 
 });
+
+Route::get('/GraphSelect',function(){
+    // PAth of View
+return Inertia::render('GraphSelect');
+
+});
+
+Route::post('file/upload', [FileController::class, 'upload'])->name('file.upload');
 

@@ -6,6 +6,7 @@ use App\Http\Requests\FileUploadRequest;
 use Illuminate\Http\Request;
 use App\Models\File;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class FileController extends Controller
 {
@@ -34,9 +35,10 @@ class FileController extends Controller
             ]);
         }
 
-        return response()->json([
-            'message' => 'File uploaded Successfully',
-            'path' => $path,
+        return Inertia::render('DataSetProcessing', [
+            'read_target' => base64_encode(file_get_contents($file->getRealPath())),
+            'file_name' => $name.'.'.$extention,
+
         ]);
     }
 }

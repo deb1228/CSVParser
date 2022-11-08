@@ -8,6 +8,7 @@ const form = useForm({
   file_target: '',
 })
 
+
 // 1. Variable for File
 const file = ref(null)
 
@@ -53,7 +54,7 @@ const submit = () => {
         </form>
         <div class="w-60 min-h-[20rem] self-end ">
           <!-- <FileUploadInput v-model="form.file_target" /> -->
-          <div class="px-7 py-5 font-bold uppercase text-lg rounded bg-pink-200  hover:bg-pink-600 text-pink-800 text-center cursor-pointer" @click="submit">Submit</div>
+          <div @click="submit" class="px-7 py-5 font-bold uppercase text-lg rounded bg-pink-200  hover:bg-pink-600 text-pink-800 text-center cursor-pointer" >Submit</div>
         </div>
        
 

@@ -42,11 +42,10 @@ const logout = () => {
             <div class="flex justify-between w-full ">
                 
                     <div class="flex pr-60  items-center">
-                        <span class="text-2xl px-6 font-bold py-3">TICKETnet</span>
+                        <span class="text-2xl px-6 font-bold py-3">GraphGenerator</span>
                     </div>
                          <div class="flex items-center gap-5 ">
-                                 <span class="px-6 cursor-pointer hover:text-white">Download</span>
-                                <span class="px-6 cursor-pointer hover:text-white">Share</span>
+                               
                                 <button @click="logout" class=" px-2  text-l text-pink-600 font-semibold rounded-full border border-pink-600 hover:text-white hover:bg-pink-600 hover:border-white focus:outline-none focus:ring-2 focus:ring-sky-600 focus:ring-offset-2">Log Out</button>
                         </div>  
             </div>
