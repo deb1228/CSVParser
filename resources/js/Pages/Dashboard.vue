@@ -1,12 +1,9 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import Welcome from '@/Components/Welcome.vue';
 import { ref } from 'vue';
-import FileUploadInput from '@/Components/FileUploadInput.vue'
-import { watchEffect } from 'vue';
 import { useForm, } from '@inertiajs/inertia-vue3';
-import { Inertia } from '@inertiajs/inertia';
 
+// form for File Upload
 const form = useForm({
   file_target: '',
 })
