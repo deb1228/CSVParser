@@ -21,7 +21,9 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
+        "apexcharts": "^3.36.3",
         "filepond": "^4.30.4",
-        "vue-filepond": "^7.0.3"
+        "vue-filepond": "^7.0.3",
+        "vue3-apexcharts": "^1.4.1"
     }
 }

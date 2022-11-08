@@ -1,6 +1,7 @@
 <script setup>
 import{ref, onMounted} from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue';
+import { useForm } from '@inertiajs/inertia-vue3';
 
 
 const props = defineProps({
@@ -9,6 +10,11 @@ const props = defineProps({
 
 let tableContent = ref(null);
 let tableColumns = ref(null);
+let selectedColumns = ref([]);
+
+let form = useForm({
+    series: []
+})
 
 onMounted(() => {
     const content = atob(props.read_target).split("\r\n")
@@ -31,7 +37,40 @@ onMounted(() => {
     }
       
     tableContent.value = data
+    console.log('Columns:')
+    console.log(selectedColumns.value.includes('Employee Id'))
 })
+
+const toggleColumn = (target) => {
+    if(selectedColumns.value.includes(target)){
+        selectedColumns.value.splice(selectedColumns.value.indexOf(target), 1)
+    }else{
+        selectedColumns.value.push(target);
+    }
+}
+
+const getColumnData = (target) => {
+    for(let i = 0; i<target.length; i++){
+        let series = {
+            name: target[i],
+            data: tableContent.value.map(a =>{
+                if(!isNaN(a[target[i]])){
+                    return parseInt(a[target[i]])
+                }else{
+                    return a[target[i]]
+                }
+            })
+        }
+        form.series.push(series)
+    }
+}
+
+const submit = () => {
+    if(selectedColumns != []){
+        getColumnData(selectedColumns)
+        form.post(route('chart.select'))
+    }
+}
 </script>
 
 <template>
@@ -39,32 +78,42 @@ onMounted(() => {
              <div class="flex flex-col  grow w-full h-full">
                 <div class="flex">
                         <div class="flex flex-col ml-20 items-start w-full self-start">
-                                <span class="text-8xl text-start font-bold mt-10" @click="readFile">We've Processed </span>                     
-                                <span class="text-8xl text-start font-bold mb-5"> your data. </span>
+                                <span class="text-6xl text-start font-black mt-10" @click="readFile">We've Processed </span>                     
+                                <span class="text-5xl text-start font-black mb-5"> your data. </span>
                                  <p>Select the columns you want the system to interpret.</p>
+                                <div class="flex justify-between">
+                                    <span>Selected Columns:</span>
+
+                                </div>
+                                <div class="flex gap-5 mt-2">
+                                    <span v-for="column in selectedColumns" class="bg-slate-100 rounded-full shadow px-3 py-1 font-semibold">
+                                        {{column}}
+                                    </span>
+                                </div>
                         </div>
-                                 <div class="w-60 min-h-[20rem] mt-10 pr-20 ">
-                                    <div class="px-7 py-5 font-bold uppercase text-lg rounded bg-pink-200  hover:bg-pink-600 text-pink-800 text-center cursor-pointer" >Continue</div>
-                                </div>    
+                        <div class="w-60 min-h-[16rem] gap-7 mt-10 pr-20 ">
+                            <span @click="getColumnData(selectedColumns)" class="px-7 py-5 mb-5 font-bold uppercase text-lg rounded bg-pink-200  hover:bg-pink-600 text-pink-800 text-center cursor-pointer ">1:Confirm</span>
+
+                            <div @click="submit" class="px-7 py-5 mt-10 font-bold uppercase text-lg rounded bg-pink-200  hover:bg-pink-600 text-pink-800 text-center cursor-pointer" >2: NEXT</div>
+                        </div>    
                 </div>               
-                <div class="w-full max-w-7xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200"> 
-                    <table class="table-auto w-full">
-                        <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                            <tr>
+                <div class="relative w-full max-w-7xl mx-auto max-h-80 overflow-y-scroll  bg-white shadow-lg rounded-sm border border-gray-200 "> 
+                    <table class="table-auto w-full ">
+                        <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50 sticky top-0">
+                            <tr class="min-h-[12rem]">
                                 <th></th>
-                                <th v-for="column in tableColumns" class="p-2">
+                                <th v-for="column in tableColumns"  @click="toggleColumn(column)">
                                     <div class="font-semibold">{{column}}</div>
+                                
                                 </th>
                                 
                             </tr>
                         </thead>
 
-                        <tbody class="text-sm divide-y divide-gray-100">
+                        <tbody class="text-sm divide-y divide-gray-100 px-3">
                             <!-- record 1 -->
                             <tr v-for="object in tableContent">
                                 <td class="p-2">
-                                    <input type="checkbox" class="w-5 h-5"
-                                        @click="toggleCheckbox($el, 2890.66)" />
                                 </td>
                                 <td class="text-center" v-for="field in object">{{field}}</td>
                             </tr>

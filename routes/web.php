@@ -4,7 +4,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\FileController;
-
+use App\Http\Requests\GraphPresentationRequest;
+use App\Http\Requests\GraphSelectRequest;
+use GuzzleHttp\Psr7\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,22 +43,27 @@ Route::get('/DataSet',function(){
     
 });
 
-Route::get('/GraphPresentation',function(){
-    // PAth of View
-return Inertia::render('GraphPresentation');
+Route::post('/GraphPresentation',function(GraphPresentationRequest $request){
+    $options = $request->validated()['options'];
+    $series = $request->validated()['series'];
+    return Inertia::render('GraphPresentation', [
+        'options' => $options,
+        'series' => $series,
+    ]);
 
-});
+})->name('graph.presentation');
 Route::get('/Login2',function(){
     // PAth of View
 return Inertia::render('Login2');
 
 });
 
-Route::get('/GraphSelect',function(){
-    // PAth of View
-return Inertia::render('GraphSelect');
-
-});
+Route::post('/GraphSelect',function(GraphSelectRequest $request){
+    $series = $request->validated()['series'];
+    return Inertia::render('GraphSelect', [
+        'series' => $series
+    ]);
+})->name('chart.select');
 
 Route::post('file/upload', [FileController::class, 'upload'])->name('file.upload');
 
