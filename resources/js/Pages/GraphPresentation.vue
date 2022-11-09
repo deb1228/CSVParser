@@ -21,8 +21,8 @@
              <div class="relative flex flex-col  grow w-full h-full">
                 <div class="flex">
                         <div class="flex flex-col ml-20 items-start w-full self-start">
-                                <span class="text-6xl text-start font-bold mt-10">Here is your </span>                     
-                                <span class="text-5xl text-start font-bold mb-5"> Graph. </span>
+                                <span class="text-8xl text-start font-bold mt-10">Here is your </span>                     
+                                <span class="text-8xl text-start font-bold mb-5"> Graph. </span>
                                 
                         </div>
                         <Link :href="route('dashboard')">
@@ -31,7 +31,7 @@
                                 </div>  
                         </Link>  
                 </div>               
-                <div class="absolute right-10 bottom-0 flex justify-end p-12 w-full ">
+                <div class="absolute right-10  flex justify-center bottom-0 mt-20  w-full ">
                         <VueApexCharts :options="options" :series="series" height="400" width="750" type="area"></VueApexCharts>
                 </div>
              </div> 

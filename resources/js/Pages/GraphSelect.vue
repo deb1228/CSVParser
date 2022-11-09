@@ -53,15 +53,13 @@ import { Inertia } from '@inertiajs/inertia';
             <div class="flex flex-col items-center grow w-full h-full">
                 <div class="flex w-full">
                     <div class="flex flex-col ml-20 items-start w-full self-start">
-                        <span class="text-8xl text-start font-bold mt-10">We're ready to  </span>                     
-                        <span class="text-8xl text-start font-bold mb-5"> pick a GRAPH. </span>
+                        <span class="text-6xl text-start font-bold mt-10">We're ready to  </span>                     
+                        <span class="text-5xl text-start font-bold mb-5"> pick a GRAPH. </span>
                             <p>Select the type of graph or chart you want the system to create.</p>
                     </div>
-                    <div class="w-60 min-h-[20rem] mt-10 pr-20 ">
-                        <div class="px-7 py-5 font-bold uppercase text-lg rounded bg-pink-200  hover:bg-pink-600 text-pink-800 text-center cursor-pointer" >NEXT</div>
-                    </div>
+                   
                 </div>               
-                <div class="grid grid-cols-3 w-[56rem] gap-5 w-">
+                <div class="grid grid-cols-3 w-[56rem] gap-5">
                     <img class="cursor-pointer hover:scale-125 transition-all duration-150 ease-in-out" src="http://localhost:8000/storage/line.png" alt="" srcset="">
                     <img class="cursor-pointer hover:scale-125 transition-all duration-150 ease-in-out" src="http://localhost:8000/storage/stock.png" alt="" srcset="">
                     <img class="cursor-pointer hover:scale-125 transition-all duration-150 ease-in-out" src="http://localhost:8000/storage/donut.png" alt="" srcset="">
